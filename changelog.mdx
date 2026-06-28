@@ -1,0 +1,153 @@
+---
+title: Changelog
+description: Version history with 2-3 recent updates, release notes, and migration guides for Mani Balan.
+---
+
+## Recent Updates
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Added real-time collaboration for shared documents
+- Introduced version history with diff viewer
+- Support for custom templates in project spaces
+
+## Improvements
+
+- Enhanced search with full-text indexing
+- Faster page load times by `>30%`
+
+## Bug Fixes
+
+- Fixed export to PDF rendering issues
+- Resolved sync conflicts in multi-user editing
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Integrated markdown preview with live editing
+- Added tagging system for better organization
+- Public sharing links with password protection
+
+## Improvements
+
+- UI redesign for better mobile responsiveness
+- Keyboard shortcuts for power users
+
+## Bug Fixes
+
+- Fixed attachment upload failures on large files
+- Corrected table editing glitches
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["breaking", "feature"]}>
+
+## Initial Release
+
+- Core documentation workspace functionality
+- Project organization with folders and spaces
+- Basic authentication and user management
+
+## Breaking Changes
+
+- Initial setup requires new config format
+
+</Update>
+
+## Migration Guide
+
+<Callout kind="alert">
+When upgrading from v1.0.0 to v1.2.0, review breaking changes related to config files and authentication endpoints.
+</Callout>
+
+Follow these steps to migrate smoothly.
+
+<Steps>
+  <Step title="Backup Your Data" icon="database">
+    Export all projects from the dashboard at `https://dashboard.example.com/export`.
+  </Step>
+  <Step title="Update Configuration" icon="settings">
+    Replace old config with the new format.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+      // Old config (v1.0)
+      module.exports = {
+        apiKey: 'YOUR_API_KEY',
+        baseUrl: 'https://api.example.com/v1'
+      };
+      ```
+      ```javascript
+      // New config (v1.2+)
+      module.exports = {
+        apiKey: 'YOUR_API_KEY',
+        baseUrl: 'https://api.example.com/v2',
+        features: { collaboration: true }
+      };
+      ```
+      ```python
+      # Old config (v1.0)
+      config = {
+          "api_key": "YOUR_API_KEY",
+          "base_url": "https://api.example.com/v1"
+      }
+      ```
+      ```python
+      # New config (v1.2+)
+      config = {
+          "api_key": "YOUR_API_KEY",
+          "base_url": "https://api.example.com/v2",
+          "features": {"collaboration": True}
+      }
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Run Migration Script" icon="play">
+    Execute the provided script:
+
+    ```bash
+    npm run migrate --from=v1.0 --to=v1.2
+    ```
+  </Step>
+  <Step title="Test Integration" icon="check-circle">
+    Verify endpoints at `https://api.example.com/v2/docs`.
+  </Step>
+</Steps>
+
+<Expandable title="Advanced Migration for Custom Integrations" default-open="false">
+If you have custom webhooks, update the payload format:
+
+```json
+{
+  "event": "doc.updated",
+  "data": {
+    "id": "doc-123",
+    "changes": { "title": "Updated Doc" }
+  }
+}
+```
+
+Previously, it used `document.updated` as the event name.
+</Expandable>
+
+## Next Steps
+
+Explore these resources to get the most out of recent releases.
+
+<Columns cols={2}>
+  <Card title="Quickstart" icon="book-open" href="/quickstart">
+    Set up Mani Balan in minutes.
+  </Card>
+  <Card title="API Reference" icon="code" href="/introduction">
+    Full API documentation and examples.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+Subscribe to updates via the dashboard at `https://dashboard.example.com/notifications` to stay informed on future releases.
+</Callout>
